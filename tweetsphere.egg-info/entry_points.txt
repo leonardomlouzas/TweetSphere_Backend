@@ -1,2 +1,2 @@
 [console_scripts]
-pamps = pamps.cli:main
+tweetsphere = tweetsphere.cli:main
