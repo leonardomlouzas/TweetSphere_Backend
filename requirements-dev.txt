@@ -1,0 +1,9 @@
+ipython                 # Terminal improved
+ipdb                       # Debugger
+sdb                         # Debugger remote
+pip-tools            # lock de dependencias
+pytest                  # test execution
+pytest-order      # test ordenation
+httpx                    # async request for tests
+black                    # auto-formating
+flake8                  # linter

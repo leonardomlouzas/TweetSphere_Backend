@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: tweetsphere
+Version: 0.1.0
+Summary: TweetSphere is a social posting app
+Home-page: TweetSphere.io
+Author: Leonardo Moreira Louzas
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
+TweetSphere is a social posting app
