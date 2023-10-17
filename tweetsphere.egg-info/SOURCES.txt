@@ -7,6 +7,7 @@ tweetsphere/auth.py
 tweetsphere/cli.py
 tweetsphere/config.py
 tweetsphere/db.py
+tweetsphere/default.toml
 tweetsphere/security.py
 tweetsphere.egg-info/PKG-INFO
 tweetsphere.egg-info/SOURCES.txt
