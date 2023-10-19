@@ -11,6 +11,8 @@ jobs:
     strategy:
       matrix:
         python-version: [3.11]
+    env:
+      TWEETSPHERE_DB: "tweetsphere_test"
 
     steps:
       - uses: actions/checkout@v3
@@ -26,5 +28,20 @@ jobs:
           pip install -r requirements-dev.txt
           pip install -r requirements.txt
 
-      - name: Test App Code
-        run: ./test.sh
+      - name: Starts container
+        run: TWEETSPHERE_DB=tweetsphere_test docker-compose up -d
+
+      - name: Resets db
+        run: docker-compose exec api tweetsphere reset-db -f
+
+      - name: Base Migration
+        run: docker-compose exec api alembic stamp base
+
+      - name: Upgrades Migration
+        run: docker-compose exec api alembic upgrade head
+
+      - name: Execute tests
+        run: docker-compose exec api pytest -v -l --tb=short --maxfail=1 tests/
+
+      - name: Stops container
+        run: docker-compose down
