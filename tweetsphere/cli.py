@@ -5,7 +5,7 @@ from sqlmodel import Session, select
 
 from .config import settings
 from .db import engine
-from .models import User, Post
+from .models import User, Post, SQLModel
 
 
 main = typer.Typer(name="TweetSphere CLI")
@@ -26,7 +26,10 @@ def shell():
     try:
         from IPython import start_ipython
 
-        start_ipython(argv=["--ipython-dir=/tmp", "--no-banner"], user_ns=_vars)
+        start_ipython(
+            argv=["--ipython-dir=/tmp", "--no-banner"],
+            user_ns=_vars,
+        )
     except ImportError:
         import code
 
@@ -61,3 +64,19 @@ def create_user(email: str, username: str, password: str):
         session.refresh(user)
         typer.echo(f"user {username} created with success")
         return user
+
+
+@main.command()
+def reset_db(
+    force: bool = typer.Option(
+        False,
+        "--force",
+        "-f",
+        help="Run with no confirmation",
+    )
+):
+    """Resets the database tables"""
+
+    force = force or typer.confirm("Are you sure?")
+    if force:
+        SQLModel.metadata.drop_all(engine)
