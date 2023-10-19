@@ -1,6 +1,9 @@
-from sqlmodel import Field, SQLModel
-from typing import Optional
+from sqlmodel import Field, SQLModel, Relationship
+from typing import Optional, List, TYPE_CHECKING
 from tweetsphere.security import HashedPassword
+
+if TYPE_CHECKING:
+    from tweetsphere.models.post import Post
 
 
 class User(SQLModel, table=True):
@@ -12,3 +15,6 @@ class User(SQLModel, table=True):
     avatar: Optional[str] = None
     bio: Optional[str] = None
     password: HashedPassword
+
+    # It populates the .user attribute on the Post Model
+    posts: List["Post"] = Relationship(back_populates="user")

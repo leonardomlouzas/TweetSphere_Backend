@@ -38,7 +38,6 @@ async def get_user_by_username(
 async def create_user(*, session: Session = ActiveSession, user: UserRequest):
     """Creates a new user"""
 
-    print("/////////////////////////////////////////")
     db_user = User.from_orm(user)  # transform UserRequest in User
     session.add(db_user)
     session.commit()
