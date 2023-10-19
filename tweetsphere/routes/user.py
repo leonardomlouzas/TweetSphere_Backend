@@ -20,7 +20,11 @@ async def list_users(*, session: Session = ActiveSession):
 
 
 @router.get("/{username}/", response_model=UserResponse)
-async def get_user_by_username(*, session: Session = ActiveSession, username: str):
+async def get_user_by_username(
+    *,
+    session: Session = ActiveSession,
+    username: str,
+):
     """Get user by username"""
 
     query = select(User).where(User.username == username)
@@ -34,7 +38,8 @@ async def get_user_by_username(*, session: Session = ActiveSession, username: st
 async def create_user(*, session: Session = ActiveSession, user: UserRequest):
     """Creates a new user"""
 
-    db_user = User.from_orm(user)  # Transforms UserRequest in User
+    print("/////////////////////////////////////////")
+    db_user = User.from_orm(user)  # transform UserRequest in User
     session.add(db_user)
     session.commit()
     session.refresh(db_user)
