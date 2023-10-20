@@ -29,7 +29,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Starts container
-        run: TWEETSPHERE_DB=tweetsphere_test docker-compose up -d
+        run: TWEETSPHERE_DB=tweetsphere_test docker-compose up -d -t
 
       - name: Base Migration
         run: docker-compose exec api alembic stamp base
