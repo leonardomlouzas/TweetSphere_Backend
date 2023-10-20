@@ -31,9 +31,6 @@ jobs:
       - name: Starts container
         run: TWEETSPHERE_DB=tweetsphere_test docker-compose up -d
 
-      - name: Resets db
-        run: docker-compose exec api tweetsphere reset-db -f
-
       - name: Base Migration
         run: docker-compose exec api alembic stamp base
 
